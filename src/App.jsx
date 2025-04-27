@@ -1,4 +1,4 @@
-import { BirthdayAnimation } from './components/BirthdayAnimation'
+import BirthdayAnimation from './components/BirthdayAnimation'
 
 function App() {
   return (
