@@ -8,12 +8,14 @@ import ConfettiEffect from './components/ConfettiEffect'
 import FadeInSection from './components/FadeInSection'
 import Fireworks from './components/Fireworks'
 import MuteButton from './components/MuteButton'
+import BirthdayModal from './components/BirthdayModal'
 
 function App() {
   const audioRef = useRef(null)
   const [showMessage, setShowMessage] = useState(false)
   const [fireworks, setFireworks] = useState(false)
   const [musicStarted, setMusicStarted] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
   return (
     <div
@@ -24,17 +26,19 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center',
         background: 'linear-gradient(to right, #4facfe 0%, #00f2fe 100%)',
-        padding: '20px',
+        padding: '5vw',
         textAlign: 'center',
         position: 'relative',
         overflow: 'hidden',
-        fontFamily: "'Pacifico', cursive",
+        fontFamily: "'Pacifico', cursive, sans-serif",
       }}
     >
       <audio ref={audioRef} loop>
         <source src="/assets/music.mp3" type="audio/mpeg" />
         Your browser does not support the audio element.
       </audio>
+
+      {showModal && <BirthdayModal onClose={() => setShowModal(false)} />}
 
       {musicStarted && <MuteButton audioRef={audioRef} />}
 
@@ -43,7 +47,12 @@ function App() {
       <ConfettiEffect />
 
       <FadeInSection delay={0}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '20px' }}>
+        <h1
+          style={{
+            fontSize: 'clamp(1.6rem, 5vw, 2.5rem)',
+            marginBottom: '20px',
+          }}
+        >
           🎉 Happy Birthday! 🎉
         </h1>
       </FadeInSection>
@@ -63,18 +72,19 @@ function App() {
             setShowMessage(true)
             setFireworks(true)
             setMusicStarted(true)
+            setShowModal(true)
             audioRef.current?.play()
           }}
           style={{
             marginTop: '30px',
-            padding: '10px 20px',
-            fontSize: '1.2rem',
+            padding: '10px 5vw',
+            fontSize: 'clamp(1rem, 4vw, 1.2rem)',
             borderRadius: '10px',
             border: 'none',
             backgroundColor: '#ff7eb3',
             color: 'white',
             cursor: 'pointer',
-            fontFamily: "'Pacifico', cursive",
+            fontFamily: "'Pacifico', cursive, sans-serif",
           }}
           whileHover={{ scale: 1.1 }}
           animate={{ scale: [1, 1.05, 1] }}
@@ -87,18 +97,6 @@ function App() {
           Otvori moju poruku 🎁
         </motion.button>
       </FadeInSection>
-
-      {/* Skrivena poruka */}
-      {showMessage && (
-        <FadeInSection delay={0.2}>
-          <p
-            style={{ fontSize: '1.5rem', marginTop: '20px', maxWidth: '600px' }}
-          >
-            🥰 Srećan rođendan, ljubavi! Hvala ti što ulepšavaš svaki moj dan.
-            Volim te više nego što reči mogu opisati! ❤️
-          </p>
-        </FadeInSection>
-      )}
     </div>
   )
 }
