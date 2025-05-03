@@ -1,5 +1,3 @@
-// src/components/BirthdayAnimation.jsx
-
 import Lottie from 'lottie-react'
 import birthdayAnimation from '../assets/birthday.json'
 
